@@ -16,12 +16,13 @@ const Url = () => {
         setStatus(true);
     }
 
-    const fetchEstadistica = async() => {
-        const result  = await axios(`http://localhost:8000/urls/estadistica/${idGenerado}`);
+    const fetchEstadistica = async(id) => {
+        const result  = await axios(`http://localhost:8000/urls/estadistica/${id}`);
         console.log("Result Data:",result.data)
         setUrl(result.data)
-        setStatus(false);
     }
+
+
 
     const updateUrl =  async () => {
         axios.post(`http://localhost:8000/urls/${idGenerado}`)
@@ -32,21 +33,25 @@ const Url = () => {
             console.log(err);                
         });
 
+        console.log("URL.URL", url.url)
         window.location.href = url.url
     }
 
     const redirectUrl = () => {
         updateUrl();
-        //window.location.href = url.url
-
-
-
     }
 
     useEffect(() => {
         fetchUrl();
         //fetchEstadistica();
     }, []);
+
+    var aux;
+
+    if(status === false){
+        aux = idGenerado.substring(0, idGenerado.length - 1);
+        fetchEstadistica(aux);
+    }
 
     return ( 
         <Fragment>

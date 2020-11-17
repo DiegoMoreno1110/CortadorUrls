@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import {nanoid} from 'nanoid';
 
@@ -10,6 +10,10 @@ const Principal = () => {
         idGenerado: '',
         nuevoUrl: '',
         contador: ''
+    })
+
+    const [showUrl, setShowUrl] = useState({
+        nuevoUrl: ''
     })
 
     const {url, idGenerado, nuevoUrl, contador} = addUrl;
@@ -41,6 +45,18 @@ const Principal = () => {
         });
     }
 
+    const fetchEstadistica = async(id) => {
+        const result  = await axios(`http://localhost:8000/urls/estadistica/${id}`);
+        console.log("Result Data:",result.data)
+        setShowUrl(result.data)
+    }
+
+
+    useEffect(() => {
+        //fetchEstadistica();
+    }, []);
+
+
     return ( 
         <Fragment>
             <h1>Cortador de Url</h1>
@@ -57,6 +73,7 @@ const Principal = () => {
                     value="Generar"
                 />
             </form>
+            <p>{}</p>
         </Fragment> 
     );
 }

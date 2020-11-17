@@ -10,6 +10,7 @@ exports.createUrl =  (req, res) => {
     Url.createUrl(url).then((idGenerado) => {
         console.log('Url created with id: ', idGenerado);
         console.log('URL: ', url.url)
+        console.log('nuevURL: ', url.nuevoUrl)
         res.json('URL creada');
     });
 }
