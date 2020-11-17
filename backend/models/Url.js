@@ -14,7 +14,21 @@ exports.getUrl = (id) => {
     return knex
         .select('*')
         .from('url')
-        .where('id', id)
+        .where('idGenerado', id)
         .first()
 }
 
+exports.getCounter = (id) => {
+    return knex
+        .select('contador')
+        .from('url')
+        .where('idGenerado', id)
+        .first()
+}
+
+
+exports.updateCounter = (id, contador) => {
+    return knex('url')
+        .where('idGenerado', id)
+        .update('contador', contador + 1);
+}
