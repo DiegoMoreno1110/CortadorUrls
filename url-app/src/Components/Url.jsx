@@ -9,7 +9,6 @@ const Url = () => {
     const [url, setUrl] = useState({});
     const [status, setStatus] = useState(false);
 
-  
     const fetchUrl =  async () => {
         const result  = await axios(`http://localhost:8000/urls/${idGenerado}`);
         console.log("Result Data:",result.data)
@@ -17,27 +16,36 @@ const Url = () => {
         setStatus(true);
     }
 
-    const updatehUrl =  async () => {
+    const fetchEstadistica = async() => {
+        const result  = await axios(`http://localhost:8000/urls/estadistica/${idGenerado}`);
+        console.log("Result Data:",result.data)
+        setUrl(result.data)
+        setStatus(false);
+    }
+
+    const updateUrl =  async () => {
         axios.post(`http://localhost:8000/urls/${idGenerado}`)
         .then((res) => {
             console.log("Contador update ");  
         })
         .catch((err) => {
             console.log(err);                
- 
         });
 
         window.location.href = url.url
     }
 
     const redirectUrl = () => {
-        updatehUrl();
-        
+        updateUrl();
+        //window.location.href = url.url
+
+
 
     }
 
     useEffect(() => {
         fetchUrl();
+        //fetchEstadistica();
     }, []);
 
     return ( 

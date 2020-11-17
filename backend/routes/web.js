@@ -4,5 +4,6 @@ const { createUrl, getOneUrl, updateCounter } = require('../controllers/UrlContr
 
 router.route('/').post(createUrl);
 router.route('/:id').get(getOneUrl).post(updateCounter);
+router.route('/estadistica/:id').get(getOneUrl);
 
 module.exports = router;

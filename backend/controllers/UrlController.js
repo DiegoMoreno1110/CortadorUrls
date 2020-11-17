@@ -27,20 +27,26 @@ exports.getOneUrl = (req, res) => {
         }
         res.json(url);  
         console.log("URL NUEVA:", url.nuevoUrl);
-        //return res.redirect(url.nuevoUrl);
     });
 
 }  
 
+
 exports.updateCounter = (req, res) => {
     let idGenerado = req.params.id;
 
-    let counter = Url.getCounter(idGenerado)
+    var counter;
 
-    console.log("Counter: ", counter)
+    Url.getCounter(idGenerado).then((id) => {
+        console.log("ID:", id.contador);
+        counter = id.contador + 1
 
-    Url.updateCounter(idGenerado, counter).then((id) => {
-        res.json('Update counter');
-    });
+        Url.updateCounter(idGenerado, counter).then((id) => {
+            res.json('Update counter');
+        });
+ 
+    })
+
+    
 
 }

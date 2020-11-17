@@ -30,5 +30,5 @@ exports.getCounter = (id) => {
 exports.updateCounter = (id, contador) => {
     return knex('url')
         .where('idGenerado', id)
-        .update('contador', contador + 1);
+        .update('contador', contador);
 }
